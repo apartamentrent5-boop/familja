@@ -14,25 +14,47 @@
             padding: 0;
         }
 
+        /* BODY VE HTML: Sayfa sınırlarını tamamen kaldırıyoruz */
         body, html {
             height: 100%;
+            width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #0c1020;
-            position: relative;
+            margin: 0;
+            padding: 0;
         }
 
-        /* 1. ARKA PLAN: Derin Canlı Renk Geçişleri */
+        /* 1. KESİN ÇÖZÜM TAM EKRAN ARKA PLAN FOTOĞRAFI */
+        /* Hiçbir div'in veya dikey bloğun içine hapsolmaması için viewport (vw/vh) kullanıyoruz */
+        .photo-bg-container {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: -5 !important; /* En arkaya gömüyoruz */
+            overflow: hidden;
+        }
+
+        .photo-bg-container img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important; /* Ekranı ne olursa olsun tamamen doldurur, siyah boşluk bırakmaz */
+            display: block;
+        }
+
+        /* Önceki koyu animasyonu hafif bir overlay (katman) olarak fotoğrafın üzerine biniyor */
         .background-animated {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #070a13, #131131, #1d0a42, #0f1938);
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(-45deg, rgba(7, 10, 19, 0.4), rgba(19, 17, 49, 0.3), rgba(29, 10, 66, 0.4), rgba(15, 25, 56, 0.3));
             background-size: 400% 400%;
             animation: gradientBG 20s ease infinite;
             z-index: -4;
@@ -44,13 +66,13 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* YILDIZ ANIMASYONU: Arka planda uçuşan estetik parıltılar */
+        /* YILDIZ ANIMASYONU */
         .stars {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -3;
             pointer-events: none;
         }
@@ -69,36 +91,15 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* 2. ARKA PLAN FOTOĞRAFI: Tam ekran kaplama ve ortalama */
-        .photo-bg-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .photo-bg-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Fotoğrafın ekranı komple kaplamasını sağlar */
-            opacity: 0.85;
-        }
-
-        /* Ana Kart Tasarımı (Görseldeki Gibi Şeffaf Buzlu Cam Efekti) */
+        /* TAM GÖRSELDEKİ GİBİ KUSURSUZ BUZLU CAM KART (GLASSMORPHISM) */
         .container {
             width: 90%;
-            max-width: 750px;
-            min-height: 580px;
-            background: rgba(255, 255, 255, 0.07); /* Tamamen şeffaf ve açık tonlu yapıldı */
-            backdrop-filter: blur(15px) saturate(140%); /* Arkadaki fotoğrafın yumuşakça görünmesini sağlayan buzlu cam efekti */
-            -webkit-backdrop-filter: blur(15px) saturate(140%);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            max-width: 700px;
+            min-height: 550px;
+            background: rgba(255, 255, 255, 0.08) !important; /* Saydam beyaz doku */
+            backdrop-filter: blur(20px) saturate(160%) !important; /* Yoğun arkadan parlayan buz efekti */
+            -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
             border-radius: 28px;
             padding: 40px;
             display: flex;
@@ -106,35 +107,30 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
 
-        /* Kartın İçindeki Küçük Orijinal Fotoğraf Alanı */
+        /* Küçük Profil Resmi */
         .mini-photo {
             width: 130px;
             height: 130px;
             border-radius: 50%;
-            border: 3px solid rgba(251, 191, 36, 0.7);
+            border: 3px solid rgba(251, 191, 36, 0.8);
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             margin-bottom: 10px;
             transition: transform 0.5s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.3);
         }
 
         .mini-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .mini-photo:hover {
-            transform: scale(1.05);
         }
 
         /* Sayfa Bölümleri */
@@ -151,54 +147,33 @@
             display: flex;
         }
 
-        /* YAZILARIN ANIMASYONLARI */
-        .page.active h1 {
-            animation: slowFadeIn 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        .page.active p {
-            animation: slowFadeIn 3.0s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.4s;
-            opacity: 0;
-        }
-
-        .page.active .btn-next {
-            animation: slowFadeIn 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.8s;
-            opacity: 0;
-        }
+        /* Animasyonlar */
+        .page.active h1 { animation: slowFadeIn 1.8s ease forwards; }
+        .page.active p { animation: slowFadeIn 2.2s ease forwards; animation-delay: 0.3s; opacity: 0; }
+        .page.active .btn-next { animation: slowFadeIn 2.5s ease forwards; animation-delay: 0.6s; opacity: 0; }
 
         @keyframes slowFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Başlıklar */
         h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 3.8rem;
             color: #fbbf24;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
 
-        /* Duygusal Sözler */
         p {
             font-size: 1.15rem;
             line-height: 1.8;
             color: #ffffff;
             font-weight: 400;
             max-width: 600px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
         }
 
-        /* Şık Buton Tasarımı */
         .btn-next {
             background: linear-gradient(135deg, #fbbf24, #d97706);
             color: #0f172a;
@@ -210,7 +185,7 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 30px;
+            margin-top: 25px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
@@ -220,45 +195,36 @@
             box-shadow: 0 6px 20px rgba(251, 191, 36, 0.6);
         }
 
-        /* Müzik Simgesi Alt Köşe */
         .music-indicator {
             position: absolute;
             bottom: 15px;
             right: 25px;
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
             display: none;
             align-items: center;
             gap: 6px;
-            letter-spacing: 0.5px;
             text-shadow: 1px 1px 2px black;
         }
 
-        .music-indicator.visible {
-            display: flex;
-        }
+        .music-indicator.visible { display: flex; }
 
-        /* Küçük Ekranlar İçin Uyum */
         @media (max-width: 480px) {
-            h1 { font-size: 3rem; }
-            p { font-size: 1rem; line-height: 1.6; }
-            .container { padding: 25px; min-height: 520px; background: rgba(0, 0, 0, 0.4); }
+            h1 { font-size: 2.8rem; }
+            p { font-size: 0.95rem; line-height: 1.6; }
+            .container { padding: 25px; min-height: 480px; }
             .mini-photo { width: 110px; height: 110px; }
-            .photo-bg-container img {
-                object-fit: cover;
-            }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-animated"></div>
-    
-    <div class="stars" id="stars-container"></div>
-    
     <div class="photo-bg-container">
         <img src="aile.png" alt="Aile Fotoğrafı Arka Plan">
     </div>
+
+    <div class="background-animated"></div>
+    <div class="stars" id="stars-container"></div>
 
     <audio id="bg-music" loop>
         <source src="sarki.mp3" type="audio/mpeg">
@@ -309,13 +275,13 @@
     <script>
         function createStars() {
             const container = document.getElementById('stars-container');
-            const starCount = 35;
+            const starCount = 40;
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                const size = Math.random() * 3 + 1;
+                const size = Math.random() * 2.5 + 1;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 star.style.left = `${Math.random() * 100}vw`;
@@ -339,7 +305,7 @@
                 music.play().then(() => {
                     document.getElementById('music-status').classList.add('visible');
                 }).catch(err => {
-                    console.log("Müzik engellendi:", err);
+                    console.log("Müzik yürütülemedi:", err);
                 });
             }
 
