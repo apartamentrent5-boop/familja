@@ -69,7 +69,7 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* 2. ARKA PLAN FOTOĞRAFI: Tam sığdırma ve ortalama */
+        /* 2. ARKA PLAN FOTOĞRAFI: Tam ekran kaplama ve ortalama */
         .photo-bg-container {
             position: fixed;
             top: 0;
@@ -86,19 +86,19 @@
         .photo-bg-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; 
+            object-fit: cover; /* Fotoğrafın ekranı komple kaplamasını sağlar */
             opacity: 0.85;
         }
 
-        /* Ana Kart Tasarımı (Şeffaf Buzlu Cam Efekti - Fotoğraf İçinden Net Görünür) */
+        /* Ana Kart Tasarımı (Görseldeki Gibi Şeffaf Buzlu Cam Efekti) */
         .container {
             width: 90%;
             max-width: 750px;
             min-height: 580px;
-            background: rgba(255, 255, 255, 0.05); /* Mavi tonu kaldırıldı, tamamen şeffaf yapıldı */
-            backdrop-filter: blur(12px) saturate(160%); /* Arkadaki fotoğrafı estetik gösteren cam efekti */
-            -webkit-backdrop-filter: blur(12px) saturate(160%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.07); /* Tamamen şeffaf ve açık tonlu yapıldı */
+            backdrop-filter: blur(15px) saturate(140%); /* Arkadaki fotoğrafın yumuşakça görünmesini sağlayan buzlu cam efekti */
+            -webkit-backdrop-filter: blur(15px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 28px;
             padding: 40px;
             display: flex;
@@ -106,7 +106,7 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
             position: relative;
             overflow: hidden;
         }
@@ -195,7 +195,7 @@
             color: #ffffff;
             font-weight: 400;
             max-width: 600px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* Şeffaf kartta yazıların rahat okunması için gölge güçlendirildi */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         /* Şık Buton Tasarımı */
@@ -245,7 +245,7 @@
             .container { padding: 25px; min-height: 520px; background: rgba(0, 0, 0, 0.4); }
             .mini-photo { width: 110px; height: 110px; }
             .photo-bg-container img {
-                object-fit: cover; /* Mobilde tam ekran kaplaması her zaman daha estetiktir */
+                object-fit: cover;
             }
         }
     </style>
@@ -307,16 +307,14 @@
     </div>
 
     <script>
-        // Arka plan için otomatik rastgele uçuşan yıldızlar oluşturma fonksiyonu
         function createStars() {
             const container = document.getElementById('stars-container');
-            const starCount = 35; // Ekrandaki parıltı yoğunluğu
+            const starCount = 35;
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                // Rastgele boyut, konum ve hız ayarları
                 const size = Math.random() * 3 + 1;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
@@ -331,7 +329,6 @@
             }
         }
 
-        // Sayfa yüklendiğinde yıldızları başlat
         window.addEventListener('DOMContentLoaded', createStars);
 
         function nextPage(currentPageNumber) {
