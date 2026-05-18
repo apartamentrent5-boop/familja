@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canım Ailem</title>
     <style>
-        /* Google Fonts - Şık Başlık ve Okunaklı Metin Fontları */
+        /* Google Fonts - Şık ve Okunaklı Yazı Tipi */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap');
 
         * {
@@ -21,19 +21,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #0f172a;
         }
 
-        /* 1. ARKA PLAN: Canlı, Yavaşça Dönen Gece Safiri & Altın Degrade Efekti */
+        /* Canlı ve Dinamik Arka Plan Animasyonu */
         .background-animated {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(-45deg, #090d16, #1e1b4b, #2e1065, #172554, #451a03);
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #3b0764, #1e3a8a);
             background-size: 400% 400%;
-            animation: gradientBG 20s ease infinite;
+            animation: gradientBG 15s ease infinite;
             z-index: -2;
         }
 
@@ -43,7 +42,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 2. ARKA PLAN: Aile Fotoğrafı Yumuşak Geçişle Arkaya Gömülü */
+        /* Aile Fotoğrafı Arka Planı (Hafif Flu ve Şık) */
         .photo-bg {
             position: fixed;
             top: 0;
@@ -51,8 +50,8 @@
             width: 100%;
             height: 100%;
             background: url('aile.png') no-repeat center center/cover;
-            opacity: 0.18;
-            filter: blur(3px);
+            opacity: 0.25;
+            filter: blur(4px);
             z-index: -1;
         }
 
@@ -60,30 +59,31 @@
         .container {
             width: 90%;
             max-width: 750px;
-            min-height: 580px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
+            min-height: 550px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
             padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
             position: relative;
+            overflow: hidden;
         }
 
         /* Kartın İçindeki Küçük Orijinal Fotoğraf Alanı */
         .mini-photo {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            border: 3px solid rgba(251, 191, 36, 0.4); /* Hafif altın rengi çerçeve */
+            border: 3px solid rgba(255, 255, 255, 0.6);
             background: url('aile.png') no-repeat center center/cover;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             margin-bottom: 10px;
             transition: transform 0.5s ease;
         }
@@ -92,9 +92,12 @@
             transform: scale(1.05);
         }
 
-        /* Sayfa Bölümleri */
+        /* Sayfa Geçiş Animasyonları */
         .page {
             display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -104,53 +107,27 @@
 
         .page.active {
             display: flex;
-        }
-
-        /* YAZILARIN YAVAŞÇA GELİP DURMA ANIMASYONU */
-        .page.active h1 {
-            animation: slowFadeIn 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        .page.active p {
-            animation: slowFadeIn 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.4s; /* Metin başlıktan hemen sonra süzülecek */
-            opacity: 0; /* Animasyon başlayana kadar gizli tutar */
-        }
-
-        .page.active .btn-next {
-            animation: slowFadeIn 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.8s;
-            opacity: 0;
-        }
-
-        @keyframes slowFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Başlıklar İçin Estetik Font */
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             color: #fbbf24; /* Altın Sarısı */
             margin-bottom: 15px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         /* Duygusal Sözler */
         p {
             font-size: 1.15rem;
             line-height: 1.8;
-            color: #f1f5f9;
+            color: #f8fafc;
             font-weight: 300;
             max-width: 600px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
 
         /* Şık Buton Tasarımı */
@@ -158,45 +135,49 @@
             background: linear-gradient(135deg, #fbbf24, #d97706);
             color: #0f172a;
             border: none;
-            padding: 14px 40px;
-            font-size: 0.95rem;
+            padding: 14px 35px;
+            font-size: 1rem;
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 25px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
         }
 
         .btn-next:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.6);
+            background: linear-gradient(135deg, #fef08a, #fbbf24);
         }
 
-        /* Müzik Durum İkonu */
+        .btn-next:active {
+            transform: translateY(-1px);
+        }
+
+        /* Müzik Simgesi Alt Köşe */
         .music-indicator {
             position: absolute;
             bottom: 15px;
-            right: 25px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.3);
+            right: 20px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
             display: none;
             align-items: center;
-            gap: 6px;
-            letter-spacing: 0.5px;
+            gap: 5px;
         }
 
         .music-indicator.visible {
             display: flex;
         }
 
-        /* Mobil Ekran Uyumluluğu */
+        /* Küçük Ekranlar İçin Uyum */
         @media (max-width: 480px) {
-            h1 { font-size: 3rem; }
-            p { font-size: 1rem; line-height: 1.6; }
-            .container { padding: 25px; min-height: 520px; }
+            h1 { font-size: 2.8rem; }
+            p { font-size: 1rem; }
+            .container { padding: 25px; min-height: 500px; }
             .mini-photo { width: 110px; height: 110px; }
         }
     </style>
@@ -239,55 +220,45 @@
         </div>
 
         <div class="page" id="page-5">
-            <h1>Canım Yeğenlerime</h1>
-            <p>Evin neşesi, gözlerimizin ışığı canım yeğenlerim... Sizin o masum gülüşleriniz dünyadaki her şeye değer. Bu güzel ailenin yarını, en tatlı umutları sizlersiniz. Hep birlikte, sağlıkla ve sevgi dolu nice mutlu anılar biriktireceğimiz yıllara...</p>
+            <h1>Geleceğimiz, Yeğenlerime</h1>
+            <p>Evin neşesi, gözlerimizin ışığı canım yeğenlerim... Sizin o masum gülüşleriniz dünyadaki her şeye değer. Bu güzel ailenin yarını sizlersiniz. Hep birlikte, sağlıkla, sevgi dolu ve nice mutlu anılar biriktireceğimiz upuzun yıllara...</p>
             <button class="btn-next" onclick="nextPage(5)">Baştan Oku</button>
         </div>
 
         <div class="music-indicator" id="music-status">
-            🎵 Müzik kesintisiz çalıyor...
+            🎵 Arka planda müzik çalıyor...
         </div>
 
     </div>
 
     <script>
+        // Sayfa Değiştirme ve Müzik Kontrol Fonksiyonu
         function nextPage(currentPageNumber) {
+            // Aktif olan sayfayı bul ve kapat
             const currentBox = document.getElementById(`page-${currentPageNumber}`);
-            
-            // İlk sayfadan geçerken müziği başlat (Tarayıcı engeline takılmamak için)
+            currentBox.classList.remove('active');
+
+            // Müzik kontrolü: İlk sayfadan geçişte müziği başlat
             if (currentPageNumber === 1) {
                 const music = document.getElementById('bg-music');
                 music.play().then(() => {
                     document.getElementById('music-status').classList.add('visible');
-                }).catch(err => {
-                    console.log("Müzik başlatılamadı, etkileşim gerekiyor:", err);
+                }).catch(error => {
+                    console.log("Müzik otomatik başlatılamadı, tarayıcı izni gerekiyor:", error);
                 });
             }
 
-            // Aktif sayfayı kapat
-            currentBox.classList.remove('active');
-
-            // Bir sonraki sayfa numarasını ayarla (5'ten sonra tekrar 1'e döner)
+            // Bir sonraki sayfa numarasını belirle (5'ten sonra 1'e dönecek şekilde)
             let nextPageNumber = currentPageNumber + 1;
             if (nextPageNumber > 5) {
                 nextPageNumber = 1;
             }
 
-            // Yeni sayfayı seç
+            // Yeni sayfayı aktif et ve pürüzsüz animasyon için kısa bir delay koy
             const nextBox = document.getElementById(`page-${nextPageNumber}`);
-
-            // Animasyonların her sayfa açılışında sıfırdan ve yavaşça tetiklenmesi için DOM'u yeniliyoruz
-            const elementsToAnimate = nextBox.querySelectorAll('h1, p, .btn-next');
-            elementsToAnimate.forEach(el => {
-                el.style.animation = 'none';
-                el.offsetHeight; /* Tarayıcıya elementi yeniden hesaplatıp animasyonu sıfırlatır */
-                el.style.animation = null; 
-            });
-
-            // Sayfayı pürüzsüzce aktif et
             setTimeout(() => {
                 nextBox.classList.add('active');
-            }, 30);
+            }, 50);
         }
     </script>
 </body>
